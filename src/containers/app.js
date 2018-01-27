@@ -14,7 +14,7 @@ class App extends Component {
         const {calendar} = this.props;
         return (
             <div>
-                <Calendar DayCell={Cell} data={calendar.data}/>
+                <Calendar DayCell={Cell} data={calendar.data} daysOfTheWeek={calendar.daysOfTheWeek}/>
             </div>
         )
     }
