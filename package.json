@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --progress --colors --config ./webpack.config.js"
+    "dev": "webpack-dev-server --progress --colors --config ./webpack.config.js",
+    "start": "webpack && http-server"
   },
   "author": "Christian Brandalise",
   "license": "ISC",
@@ -24,6 +25,8 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
+    "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "node-sass": "^4.7.2",
     "react": "^16.2.0",

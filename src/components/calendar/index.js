@@ -8,7 +8,12 @@ class Calendar extends Component {
     renderHeader() {
         const {daysOfTheWeek} = this.props;
         if(!daysOfTheWeek) return null;
-        return daysOfTheWeek.map(day => <div className={style.header}>{day}</div>)
+        const headerDays = daysOfTheWeek.map(day => <div className={style.headerCell}>{day}</div>)
+        return (
+            <div className={style.header}>
+                {headerDays}
+            </div>
+        )
     }
 
     renderDayCells() {
@@ -16,8 +21,13 @@ class Calendar extends Component {
         if(!DayCell || !data) {
             return null;
         }
+        const dayCells = data.map(d => <DayCell day={d}/>)
 
-        return data.map(d => <DayCell/>)
+        return (
+            <div className={style.body}>
+                {dayCells}
+            </div>
+        );
     }
 
     render() {

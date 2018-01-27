@@ -12,9 +12,10 @@ class App extends Component {
 
     render() {
         const {calendar} = this.props;
+        const {days} = calendar.selectedMonthData;
         return (
             <div>
-                <Calendar DayCell={Cell} data={calendar.data} daysOfTheWeek={calendar.daysOfTheWeek}/>
+                <Calendar DayCell={Cell} data={days} daysOfTheWeek={calendar.daysOfTheWeek}/>
             </div>
         )
     }
