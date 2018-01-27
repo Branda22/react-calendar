@@ -1,5 +1,8 @@
+const webpack = require('webpack');
+
 module.exports = {
   entry: [
+    'react-hot-loader/patch',
     './src/index.js'
   ],
   module: {
@@ -8,6 +11,14 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
+      },
+      {
+        test: /\.(scss)$/,
+        use: [
+          'style-loader',
+          'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+          'sass-loader'
+        ]
       }
     ]
   },
@@ -19,7 +30,11 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    hot: true
   }
 };
