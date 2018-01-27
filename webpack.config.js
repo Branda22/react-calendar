@@ -13,7 +13,7 @@ module.exports = {
         use: ['babel-loader']
       },
       {
-        test: /\.(scss)$/,
+        test: /\.(scss|sass)$/,
         use: [
           'style-loader',
           'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
