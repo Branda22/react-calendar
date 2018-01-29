@@ -27,7 +27,7 @@ class TimePicker extends Component {
   render() {
     const {hour, minute, amPm} = this.state;
     return (
-      <div>
+      <div className="field is-horizontal">
         <div>
           <select name="hour" value={hour} onChange={this.handleChange}>
             {_.range(0, 11).map(n => <option value={n}>{n}</option>)}

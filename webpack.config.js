@@ -15,9 +15,20 @@ module.exports = {
       {
         test: /\.(scss|sass)$/,
         use: [
-          'style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-          'sass-loader'
+          {loader: 'style-loader'},
+          {loader: 'css-loader'},
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('precss'),
+                  require('autoprefixer')
+                ];
+              }
+            }
+          },
+          {loader: 'sass-loader'}
         ]
       }
     ]

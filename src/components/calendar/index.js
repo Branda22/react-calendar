@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import style from './style.scss';
 class Calendar extends Component {
     constructor(props) {
         super(props)
@@ -8,9 +7,9 @@ class Calendar extends Component {
     renderHeader() {
         const {daysOfTheWeek} = this.props;
         if(!daysOfTheWeek) return null;
-        const headerDays = daysOfTheWeek.map(day => <div className={style.headerCell}>{day}</div>)
+        const headerDays = daysOfTheWeek.map(day => <div className="calendar headerCell">{day}</div>)
         return (
-            <div className={style.header}>
+            <div className="calendar header">
                 {headerDays}
             </div>
         )
@@ -24,7 +23,7 @@ class Calendar extends Component {
         const dayCells = data.map(d => <DayCell day={d} onClick={onDateClick}/>)
 
         return (
-            <div className={style.body}>
+            <div className="calendar body">
                 {dayCells}
             </div>
         );
@@ -34,7 +33,7 @@ class Calendar extends Component {
         const header = this.renderHeader()
         const days = this.renderDayCells()
         return (
-            <div className={style.root}>
+            <div className="calendar">
                 {header}
                 {days}
             </div>

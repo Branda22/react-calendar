@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import bulma from 'bulma/bulma.sass';
 import TimePicker from '../timepicker';
-import style from './style.scss';
 
 class Event extends Component {
   constructor() {
@@ -49,31 +47,31 @@ class Event extends Component {
     } = this.state;
 
     return (
-      <div className={style.root}>
-        <div className={style.modalBody}>
-          <div className={bulma.field}>
-            <label className={bulma.label}>Start Time</label>
-            <div className={bulma.control}>
+      <div className="event">
+        <div className="event modalBody">
+          <div className="field">
+            <label className="label">Start Time</label>
+            <div className="control">
               {/* <input name="startTime" value={startTime} className={bulma.input} type="datetime-local" onChange={this.handleChange} /> */}
               <TimePicker name="startTime" onChange={this.handleTimeChange} />
             </div>
           </div>
-          <div className={bulma.field}>
-            <label className={bulma.label}>End Time</label>
-            <div className={bulma.control}>
+          <div className="field">
+            <label className="label">End Time</label>
+            <div className="control">
               {/* <input name="endTime" value={endTime} className={bulma.input} type="datetime-local" onChange={this.handleChange} /> */}
               <TimePicker name="endTime" onChange={this.handleTimeChange}/>         
             </div>
           </div>
-          <div className={bulma.field}>
-            <label className={bulma.label}>Notes</label>
-            <div className={bulma.control}>
-              <input name="notes" value={notes} className={bulma.input} type="text" onChange={this.handleChange} />
+          <div className="field">
+            <label className="label">Notes</label>
+            <div className="control">
+              <input name="notes" value={notes} className="input" type="text" onChange={this.handleChange} />
             </div>
           </div>
-          <div className={bulma.field}>
-            <div className={bulma.control}>
-              <button className={bulma.button + ' ' + bulma['is-primary']} onClick={this.handleSubmit}>Send</button>
+          <div className="field">
+            <div className="control">
+              <button className="button is-primary" onClick={this.handleSubmit}>Send</button>
             </div>
           </div>
         </div>
