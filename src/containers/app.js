@@ -12,14 +12,24 @@ import {daysOfTheWeek} from '../constants';
 class App extends Component {
     constructor(props) {
         super(props)
+
+        this.state = {selectedEvent: null}
+        
         this.handleDateClick = this.handleDateClick.bind(this);
         this.handleEventSubmit = this.handleEventSubmit.bind(this);
         this.handleModalClose = this.handleModalClose.bind(this);
+        this.handleEventClick = this.handleEventClick.bind(this);
     }
 
     handleEventClick(e, date, event) {
         const {setCurrentDate, openEventModal} = this.props;
         console.log(e.target, date, event)
+        this.setState({
+            selectedEvent: event
+        }, () => {
+            setCurrentDate(date)
+            openEventModal(date, event)
+        })
     }
 
     handleDateClick(e, date) {
@@ -46,7 +56,7 @@ class App extends Component {
             <div className="app">
                 <h2 className="appTitle">{monthName}</h2>
                 <Calendar DayCell={Cell} data={days} calendar={calendar} onDateClick={this.handleDateClick} onEventClick={this.handleEventClick} />
-                <Event open={app.eventModalIsOpen} selectedDate={selectedDate} onEventSubmit={this.handleEventSubmit} onClose={this.handleModalClose} />
+                <Event event={this.state.selectedEvent} open={app.eventModalIsOpen} selectedDate={selectedDate} onEventSubmit={this.handleEventSubmit} onClose={this.handleModalClose} />
             </div>
         )
     }

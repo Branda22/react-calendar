@@ -2,20 +2,32 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import _ from 'lodash';
 
-import {formatTime, formatMinute} from '../../util/event';
+import {formatTime, formatMinute, parseTime} from '../../util/event';
 
 class TimePicker extends Component {
-  constructor() {
-    super()
-    
-    this.state = {
-      hour: '0',
-      minute: '0',
-      amPm: 'AM'
+  constructor(props) {
+    super(props)
+
+    if(props.time) {
+      this.state = parseTime(props.time);
+    } else {
+      this.state = {
+        hour: '',
+        minute: '',
+        amPm: ''
+      }
     }
     
     this.handleChange = this.handleChange.bind(this)
   }
+
+  // componentWillReceiveProps(newProps) {
+  //   if(newProps.time) {
+  //     const {hour, minute, amPm} = parseTime(newProps.time);
+  //     console.log('hello', newProps.time, hour, minute, amPm)
+  //     this.setState({hour, minute, amPm})
+  //   }
+  // }
 
   handleChange(e) {
     const {name, value} = e.target;

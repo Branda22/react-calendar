@@ -8,12 +8,26 @@ class Event extends Component {
     this.state = {
       startTime: '',
       endTime: '',
-      notes: ''
+      notes: '',
+      edit: false
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { event } = newProps;
+    console.log("eventttttt", event)
+    if(event) {
+      this.setState({
+        edit: true,
+        startTime: event.startTime,
+        endTime: event.endTime,
+        notes: event.notes
+      })
+    }
   }
 
   resetState() {
@@ -66,7 +80,8 @@ class Event extends Component {
     const {
       startTime,
       endTime,
-      notes
+      notes,
+      edit
     } = this.state;
 
     return (
@@ -76,13 +91,13 @@ class Event extends Component {
           <div className="field">
             <label className="label">Start Time</label>
             <div className="control">
-              <TimePicker name="startTime" onChange={this.handleTimeChange} />
+              <TimePicker name="startTime" time={startTime} onChange={this.handleTimeChange} />
             </div>
           </div>
           <div className="field">
             <label className="label">End Time</label>
             <div className="control">
-              <TimePicker name="endTime" onChange={this.handleTimeChange}/>         
+              <TimePicker name="endTime" time={endTime} onChange={this.handleTimeChange}/>         
             </div>
           </div>
           <div className="field">
@@ -93,7 +108,7 @@ class Event extends Component {
           </div>
           <div className="field">
             <div className="control">
-              <button className="button is-primary is-small" onClick={this.handleSubmit}>Send</button>
+              <button className="button is-primary is-small" onClick={this.handleSubmit}>{edit ? 'Edit' : 'Submit'}</button>
             </div>
           </div>
           <div className="field">

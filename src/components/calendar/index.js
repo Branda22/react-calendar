@@ -16,11 +16,11 @@ class Calendar extends Component {
     }
 
     renderDayCells() {
-        const {DayCell, data, onDateClick} = this.props;
+        const { DayCell, data, onDateClick, onEventClick} = this.props;
         if(!DayCell || !data) {
             return null;
         }
-        const dayCells = data.map(d => <DayCell date={d} onClick={onDateClick}/>)
+        const dayCells = data.map(d => <DayCell date={d} onClick={onDateClick} onEventClick={onEventClick}/>)
 
         return (
             <div className="body">
