@@ -6,10 +6,16 @@ export function prepareDataForMonth() {
     const currentYear = moment().format('YYYY')
     const firstDayOfMonth = getFirstDayOfMonth(currentMonth)
     const firstDayOffset = calculateOffSet(firstDayOfMonth)
-    const offsetDays = _.range(firstDayOffset).map(n => -1)
+    const offsetDays = _.range(firstDayOffset).map(n => {
+        return {
+            day: -1,
+            month: -1,
+            year: -1
+        }
+    } )
     const daysInMonth = _.range(1,moment().daysInMonth()+1).map(day => {
         return {
-            day, 
+            day: day.toString(), 
             month: currentMonth,
             year: currentYear
         }

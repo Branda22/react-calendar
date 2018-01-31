@@ -40,6 +40,19 @@ export function getEventById(events, eventId) {
     return events.find(event => event.id === eventId)
 }
 
+export function mapEventsToDays(days, events) {
+    console.log('mapEventsToDays:', events)
+    return days.map(date => {
+        date.events = events.filter(event => {
+            return event.day === date.day &&
+                   event.month === date.month &&
+                   event.year === date.year;
+        });
+        return date;
+    })
+    
+}
+
 //Reducer
 export default function eventsReducer(state = [], action) {
     switch(action.type) {

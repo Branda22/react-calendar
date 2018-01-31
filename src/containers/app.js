@@ -4,7 +4,7 @@ import Calendar from '../components/calendar';
 import Event from '../components/event';
 import Cell from '../components/cell';
 import { openEventModal, closeEventModal } from '../modules/app';
-import { createEvent, updateEvent } from '../modules/events';
+import { createEvent, updateEvent, mapEventsToDays } from '../modules/events';
 import { selectDate } from '../modules/calendar';
 
 import {daysOfTheWeek} from '../constants';
@@ -17,8 +17,13 @@ class App extends Component {
         this.handleModalClose = this.handleModalClose.bind(this);
     }
 
+    handleEventClick(e, date, event) {
+        const {setCurrentDate, openEventModal} = this.props;
+        console.log(e.target, date, event)
+    }
+
     handleDateClick(e, date) {
-        console.log(e, date)
+        console.log(e.target, date)
         const {setCurrentDate, openEventModal} = this.props;
         setCurrentDate(date);
         openEventModal(date);
@@ -40,17 +45,24 @@ class App extends Component {
         return (
             <div className="app">
                 <h2 className="appTitle">{monthName}</h2>
-                <Calendar DayCell={Cell} data={days} calendar={calendar} onDateClick={this.handleDateClick}/>
-                <Event open={app.eventModalIsOpen} selectedDate={selectedDate} onEventSubmit={this.handleEventSubmit} onClose={this.handleModalClose}/>
+                <Calendar DayCell={Cell} data={days} calendar={calendar} onDateClick={this.handleDateClick} onEventClick={this.handleEventClick} />
+                <Event open={app.eventModalIsOpen} selectedDate={selectedDate} onEventSubmit={this.handleEventSubmit} onClose={this.handleModalClose} />
             </div>
         )
     }
 }
 
-function mapStateToProps({app, calendar, event}) {
+function mapStateToProps({app, calendar, events}) {
     return {
         app,
-        calendar
+        calendar : {
+            ...calendar,
+            selectedMonthData: {
+                ...calendar.selectedMonthData,
+                days: mapEventsToDays(calendar.selectedMonthData.days, events)
+            }
+        },
+        events
     }
 }
 
