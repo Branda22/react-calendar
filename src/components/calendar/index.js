@@ -5,11 +5,11 @@ class Calendar extends Component {
     }
 
     renderHeader() {
-        const {daysOfTheWeek} = this.props;
+        const {daysOfTheWeek} = this.props.calendar;
         if(!daysOfTheWeek) return null;
-        const headerDays = daysOfTheWeek.map(day => <div className="calendar headerCell">{day}</div>)
+        const headerDays = daysOfTheWeek.map(day => <div className="headerCell">{day}</div>)
         return (
-            <div className="calendar header">
+            <div className="header">
                 {headerDays}
             </div>
         )
@@ -20,10 +20,10 @@ class Calendar extends Component {
         if(!DayCell || !data) {
             return null;
         }
-        const dayCells = data.map(d => <DayCell day={d} onClick={onDateClick}/>)
+        const dayCells = data.map(d => <DayCell date={d} onClick={onDateClick}/>)
 
         return (
-            <div className="calendar body">
+            <div className="body">
                 {dayCells}
             </div>
         );

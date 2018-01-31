@@ -13,6 +13,15 @@ class Event extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  resetState() {
+    this.setState({
+      startTime: '',
+      endTime: '',
+      notes: ''
+    })
   }
 
   handleChange(e) {
@@ -29,9 +38,23 @@ class Event extends Component {
     })
   }
 
+  handleCancel() {
+    this.resetState()
+    this.props.onClose()
+  }
 
   handleSubmit() {
-    console.log(this.state)
+    this.resetState()
+    this.props.onEventSubmit({...this.state, ...this.props.selectedDate})
+  }
+
+  renderHeader() {
+    const {selectedDate: {day, month, year}} = this.props;
+    return (
+      <div>
+        <h3>{`${month}/${day}/${year}`}</h3>
+      </div>
+    );
   }
 
   render() {
@@ -48,18 +71,17 @@ class Event extends Component {
 
     return (
       <div className="event">
-        <div className="event modalBody">
+        <div className="modalBody">
+          {this.renderHeader()}
           <div className="field">
             <label className="label">Start Time</label>
             <div className="control">
-              {/* <input name="startTime" value={startTime} className={bulma.input} type="datetime-local" onChange={this.handleChange} /> */}
               <TimePicker name="startTime" onChange={this.handleTimeChange} />
             </div>
           </div>
           <div className="field">
             <label className="label">End Time</label>
             <div className="control">
-              {/* <input name="endTime" value={endTime} className={bulma.input} type="datetime-local" onChange={this.handleChange} /> */}
               <TimePicker name="endTime" onChange={this.handleTimeChange}/>         
             </div>
           </div>
@@ -71,7 +93,12 @@ class Event extends Component {
           </div>
           <div className="field">
             <div className="control">
-              <button className="button is-primary" onClick={this.handleSubmit}>Send</button>
+              <button className="button is-primary is-small" onClick={this.handleSubmit}>Send</button>
+            </div>
+          </div>
+          <div className="field">
+            <div className="control">
+              <button className="button is-primary is-small" onClick={this.handleCancel}>Cancel</button>
             </div>
           </div>
         </div>

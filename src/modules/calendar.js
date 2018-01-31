@@ -5,18 +5,33 @@ const initialState = {
     selectedMonthData: prepareDataForMonth(),
     currentDay: moment().format('D'),
     daysOfTheWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    data: [...Array(30).keys()]
+    selectedDate: null
 }
 
 //Actions
+const SELECT_DATE = 'calendar/SELECT_DATE'
 
 //Action creators
-
+export function selectDate(date) {
+    return {
+        type: SELECT_DATE,
+        date
+    }
+}
 //Selectors
 
 //Reducer
 export default function calendarReducer(state = initialState, action) {
-    return state;
+    switch (action.type) {
+        case SELECT_DATE:
+            return {
+                ...state,
+                selectedDate: action.date
+            }
+    
+        default:
+            return state;
+    }
 }
 
 

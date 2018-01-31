@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import _ from 'lodash';
 
+import {formatTime, formatMinute} from '../../util/event';
+
 class TimePicker extends Component {
   constructor() {
     super()
@@ -20,25 +22,26 @@ class TimePicker extends Component {
     this.setState({
       [name]: value
     }, () => {
-      this.props.onChange({name: this.props.name, value:this.state})
+      const {hour, minute, amPm} = this.state;
+      this.props.onChange({name: this.props.name, value: formatTime(hour, minute, amPm)});
     });
   }
 
   render() {
     const {hour, minute, amPm} = this.state;
     return (
-      <div className="field is-horizontal">
-        <div>
+      <div className="time-picker field is-horizontal">
+        <div className="select is-small">
           <select name="hour" value={hour} onChange={this.handleChange}>
-            {_.range(0, 11).map(n => <option value={n}>{n}</option>)}
+            {_.range(0, 12).map(n => <option value={n}>{n}</option>)}
           </select>
         </div>
-        <div>
+        <div className="select is-small">
           <select name="minute" value={minute} onChange={this.handleChange}>
-            {_.range(0, 59).map(n => <option value={n}>{n}</option>)}
+            {_.range(0, 60).map(n => <option value={n}>{formatMinute(n)}</option>)}
           </select>
         </div>
-        <div>
+        <div className="select is-small">
           <select name="amPm" value={amPm} onChange={this.handleChange}>
             <option value="AM">AM</option>
             <option value="PM">PM</option>

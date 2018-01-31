@@ -1,18 +1,15 @@
 import React from 'react';
 import classNames from 'classnames'
 
-const Day = ({day, onClick}) => {
-    // const cls = classNames({
-    //     [style.root]: true,
-    //     [style.prevMonth]: day < 0
-    // })
+const Day = ({date, events, onClick}) => {    
+    const handleClick = (e) => onClick(e, date);
     
-    const handleClick = (e) =>  onClick(e, day);
-    
-    const label = day > 0 ? day : ''
+    const renderLabel = () => date.day > 0 ? <p className="day-label">{date.day}</p> : null;
     
     return (
-        <div className="cell" onClick={handleClick}>{label}</div>
+        <div className={`cell ${date.day < 0 ? 'prevMonth' : '' }`} onClick={handleClick}>
+            {renderLabel()}        
+        </div>
     )
 }
 
