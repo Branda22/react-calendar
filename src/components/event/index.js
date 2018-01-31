@@ -6,6 +6,7 @@ class Event extends Component {
     super()
 
     this.state = {
+      id: '',
       startTime: '',
       endTime: '',
       notes: '',
@@ -19,10 +20,11 @@ class Event extends Component {
 
   componentWillReceiveProps(newProps) {
     const { event } = newProps;
-    console.log("eventttttt", event)
+    console.log('event inside receiveProps', event)
     if(event) {
       this.setState({
         edit: true,
+        id: event.id,
         startTime: event.startTime,
         endTime: event.endTime,
         notes: event.notes

@@ -41,7 +41,13 @@ class App extends Component {
 
     handleEventSubmit(event) {
         console.log(event)
-        this.props.createEvent(event)
+        if(event.id) {
+            console.log('update')
+            this.props.updateEvent(event)
+        } else {
+            console.log('create')
+            this.props.createEvent(event)
+        }
     }
 
     handleModalClose() {

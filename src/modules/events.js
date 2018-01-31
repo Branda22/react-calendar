@@ -41,7 +41,6 @@ export function getEventById(events, eventId) {
 }
 
 export function mapEventsToDays(days, events) {
-    console.log('mapEventsToDays:', events)
     return days.map(date => {
         date.events = events.filter(event => {
             return event.day === date.day &&
@@ -63,8 +62,9 @@ export default function eventsReducer(state = [], action) {
             return events;
         case GET_EVENTS:
             return state;
-        case EDIT_EVENT:
-
+        case UPDATE_EVENT:
+            const restOfEvents = _.filter(state, event => event.id !== action.event.id)
+            return [...state, action.event]
         default:
             return state;
     }

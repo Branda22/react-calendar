@@ -21,14 +21,6 @@ class TimePicker extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   if(newProps.time) {
-  //     const {hour, minute, amPm} = parseTime(newProps.time);
-  //     console.log('hello', newProps.time, hour, minute, amPm)
-  //     this.setState({hour, minute, amPm})
-  //   }
-  // }
-
   handleChange(e) {
     const {name, value} = e.target;
     this.setState({
