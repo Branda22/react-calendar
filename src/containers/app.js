@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Calendar from '../components/calendar';
 import Event from '../components/event';
 import Cell from '../components/cell';
+import Challenge2 from '../components/challenge2';
 import { openEventModal, closeEventModal, clearMessage } from '../modules/app';
 import { createEvent, updateEvent, mapEventsToDays, deleteEvent } from '../modules/events';
 import { selectDate } from '../modules/calendar';
@@ -103,6 +104,9 @@ class App extends Component {
                        onEventSubmit={this.handleEventSubmit} 
                        onEventDelete={this.handleEventDelete} 
                        onClose={this.handleModalClose} />
+                <div>
+                    <Challenge2 />
+                </div>
             </div>
         )
     }

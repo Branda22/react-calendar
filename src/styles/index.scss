@@ -94,4 +94,28 @@
     }
 }
 
+.challenge2 {
+    border: 3px solid gray;
+    height: 400px;
+    width: 525px;
+    background-color: lightcyan;
+    margin: 50px;
+    .inner {
+        border: 3px solid gray;
+        background-color: orange;
+        height: 225px;
+        margin: 55px 65px;
+        .inner-inner {
+            border: 3px solid gray;
+            margin: 35px 45px;
+            height: 100px;
+            padding: 35px;
+        }
+    }
+
+    .challenge-label {
+        text-align: center;
+    }
+}
+
 
