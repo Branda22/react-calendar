@@ -15,9 +15,7 @@ export function getEvents() {
 }
 
 export function createEvent(event, dayEvents) {
-    console.log('INSIDE CREATE EVENT')
     return dispatch => {
-        dispatch(clearMessage())
         if(checkForConflict(event, dayEvents)) {
             dispatch(conflictMessage())
         }
@@ -29,7 +27,6 @@ export function createEvent(event, dayEvents) {
 
 export function updateEvent(event, dayEvents) {
     return dispatch => {
-        dispatch(clearMessage())
         if(checkForConflict(event, dayEvents)) {
             dispatch(conflictMessage())
         }
@@ -40,7 +37,6 @@ export function updateEvent(event, dayEvents) {
 }
 
 export function newEvent(event) {
-    console.log('inside new event')
     return {
         type: CREATE_EVENT,
         newEvent: {

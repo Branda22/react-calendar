@@ -36,7 +36,8 @@ class Event extends Component {
     this.setState({
       startTime: '',
       endTime: '',
-      notes: ''
+      notes: '',
+      edit: false
     })
   }
 

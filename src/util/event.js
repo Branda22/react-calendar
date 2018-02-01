@@ -25,6 +25,9 @@ export function checkForConflict(newEvent, events=[]) {
 
     for (let i = 0; i < events.length; i++) {
         const event = events[i];
+        if(newEvent.id === event.id) {
+            continue;
+        }
         const startTime = moment(event.startTime, TIME_FORMAT)
         const endTime = moment(event.endTime, TIME_FORMAT)
 

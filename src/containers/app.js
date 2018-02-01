@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Calendar from '../components/calendar';
 import Event from '../components/event';
 import Cell from '../components/cell';
-import { openEventModal, closeEventModal } from '../modules/app';
+import { openEventModal, closeEventModal, clearMessage } from '../modules/app';
 import { createEvent, updateEvent, mapEventsToDays, deleteEvent } from '../modules/events';
 import { selectDate } from '../modules/calendar';
 
@@ -26,10 +26,13 @@ class App extends Component {
         if(newProps.app.messages) {
             this.setState({renderAlerts: true});
         }
+        else {
+            this.setState({renderAlerts: false})
+        }
     }
 
     resetState() {
-        this.setState({selectedState: null})
+        this.setState({selectedEvent: null})
     }
 
     handleEventClick(e, date, event) {
@@ -76,6 +79,7 @@ class App extends Component {
         const { app } = this.props;
         setTimeout(() => {
             this.setState({renderAlerts: false})
+            this.props.clearMessages();
         }, 3000);
         return (
             <div className="alerts notification is-danger">
@@ -137,6 +141,9 @@ function mapDispatchToProps(dispatch) {
         },
         setCurrentDate(date) {
             dispatch(selectDate(date))
+        },
+        clearMessages() {
+            dispatch(clearMessage())
         }
     }
 }
