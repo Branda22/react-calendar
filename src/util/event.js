@@ -1,3 +1,4 @@
+import moment from 'moment';
 export const TIME_FORMAT = 'hh:mma';
 
 export function formatTime(h, m, amPm) {
@@ -18,7 +19,7 @@ export function parseTime(time) {
     };
 }
 
-export function checkForConflict(newEvent, events) {
+export function checkForConflict(newEvent, events=[]) {
     const newEventStartTime = moment(newEvent.startTime, TIME_FORMAT)
     const newEventEndTime = moment(newEvent.endTime, TIME_FORMAT)
 

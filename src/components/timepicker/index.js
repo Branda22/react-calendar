@@ -12,9 +12,9 @@ class TimePicker extends Component {
       this.state = parseTime(props.time);
     } else {
       this.state = {
-        hour: '',
-        minute: '',
-        amPm: ''
+        hour: '00',
+        minute: '00',
+        amPm: 'AM'
       }
     }
     

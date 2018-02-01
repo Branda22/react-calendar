@@ -12,7 +12,9 @@ const CONFLICT_MESSAGE = 'app/CONFLICT_MESSAGE';
 const CLEAR_MESSAGE = 'app/CLEAR_MESSAGE';
 
 export const openEventModal = () => ({type: OPEN_EVENT_MODAL});
+
 export const closeEventModal = () => ({type: CLOSE_EVENT_MODAL});
+
 export const conflictMessage = () => {
     return {
         type: CONFLICT_MESSAGE,

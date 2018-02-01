@@ -1,5 +1,6 @@
 import uuid from 'uuid/v4'
 import { checkForConflict } from '../util/event';
+import { conflictMessage } from './app';
 
 //Actions
 const GET_EVENTS = 'event/GET_EVENTS';
@@ -16,11 +17,13 @@ export function getEvents() {
 export function createEvent(event, dayEvents) {
     console.log('INSIDE CREATE EVENT')
     return dispatch => {
-        // if(checkForConflict(event, dayEvents)) {
-        //     //TODO: dispatch conflicts
-        // }
-
-        dispatch(newEvent(event))
+        if(checkForConflict(event, dayEvents)) {
+            //TODO: dispatch conflicts
+            dispatch(conflictMessage())
+        }
+        else {
+            dispatch(newEvent(event))
+        }
     }
 }
 

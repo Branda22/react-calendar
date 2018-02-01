@@ -44,12 +44,13 @@ class App extends Component {
     }
 
     handleEventSubmit(event) {
-        this.resetState();
+        const { calendar: {selectedDate: {events}}} = this.props;
         if(event.id) {
-            this.props.updateEvent(event);
+            this.props.updateEvent(event, events);
         } else {
-            this.props.createEvent(event);
+            this.props.createEvent(event, events);
         }
+        this.resetState();
     }
 
     handleEventDelete(eventId) {
@@ -70,7 +71,13 @@ class App extends Component {
             <div className="app">
                 <h2 className="appTitle">{monthName}</h2>
                 <Calendar DayCell={Cell} data={days} calendar={calendar} onDateClick={this.handleDateClick} onEventClick={this.handleEventClick} />
-                <Event event={this.state.selectedEvent} open={app.eventModalIsOpen} selectedDate={selectedDate} onEventSubmit={this.handleEventSubmit} onEventDelete={this.handleEventDelete} onClose={this.handleModalClose} />
+                <Event event={this.state.selectedEvent} 
+                       messages={app.messages}
+                       open={app.eventModalIsOpen} 
+                       selectedDate={selectedDate} 
+                       onEventSubmit={this.handleEventSubmit} 
+                       onEventDelete={this.handleEventDelete} 
+                       onClose={this.handleModalClose} />
             </div>
         )
     }
@@ -98,11 +105,11 @@ function mapDispatchToProps(dispatch) {
         closeEventModal() {
             dispatch(closeEventModal())
         },
-        createEvent(event) {
-            dispatch(createEvent(event))
+        createEvent(event, events) {
+            dispatch(createEvent(event, events))
         },
-        updateEvent(event) {
-            dispatch(updateEvent(event))
+        updateEvent(event, events) {
+            dispatch(updateEvent(event, events))
         },
         deleteEvent(eventId) {
             dispatch(deleteEvent(eventId))
