@@ -20,13 +20,13 @@ const Day = ({date, events, onClick, onEventClick}) => {
             return null;
         }
 
-        return events.map(event => <Event key={event.id} event={event} onClick={date.day > 0 ? handleEventClick : null} />);
+        return events.map(event => <Event key={event.id} event={event} onClick={handleEventClick} />);
     }
 
     return (
-        <div className={`cell ${date.day < 0 ? 'prevMonth' : '' }`} onClick={handleClick}>
+        <div className={`cell ${date.day < 0 ? 'prevMonth' : ''}`} onClick={date.day > 0 ? handleClick : null}>
             {renderLabel()}
-            {renderEvents()}     
+            {renderEvents()}
         </div>
     )
 }
