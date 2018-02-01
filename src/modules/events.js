@@ -1,4 +1,5 @@
 import uuid from 'uuid/v4'
+import { checkForConflict } from '../util/event';
 
 //Actions
 const GET_EVENTS = 'event/GET_EVENTS';
@@ -11,7 +12,20 @@ const EDIT_EVENT = 'event/EDIT_EVENT';
 export function getEvents() {
     return { type: GET_EVENTS }
 }
-export function createEvent(event) {
+
+export function createEvent(event, dayEvents) {
+    console.log('INSIDE CREATE EVENT')
+    return dispatch => {
+        // if(checkForConflict(event, dayEvents)) {
+        //     //TODO: dispatch conflicts
+        // }
+
+        dispatch(newEvent(event))
+    }
+}
+
+export function newEvent(event) {
+    console.log('inside new event')
     return {
         type: CREATE_EVENT,
         newEvent: {

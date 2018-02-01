@@ -37,6 +37,7 @@ class App extends Component {
     }
 
     handleDateClick(e, date) {
+        this.resetState()
         const {setCurrentDate, openEventModal} = this.props;
         setCurrentDate(date);
         openEventModal(date);
