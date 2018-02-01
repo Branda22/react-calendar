@@ -13,13 +13,19 @@ class App extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {selectedEvent: null}
+        this.state = {selectedEvent: null, renderAlerts: false}
         
         this.handleDateClick = this.handleDateClick.bind(this);
         this.handleEventSubmit = this.handleEventSubmit.bind(this);
         this.handleModalClose = this.handleModalClose.bind(this);
         this.handleEventClick = this.handleEventClick.bind(this);
         this.handleEventDelete = this.handleEventDelete.bind(this);
+    }
+
+    componentWillReceiveProps(newProps) {
+        if(newProps.app.messages) {
+            this.setState({renderAlerts: true});
+        }
     }
 
     resetState() {
@@ -63,16 +69,31 @@ class App extends Component {
         this.props.closeEventModal();
     }
 
+    renderAlerts() {
+        if(!this.state.renderAlerts) {
+            return null;
+        }
+        const { app } = this.props;
+        setTimeout(() => {
+            this.setState({renderAlerts: false})
+        }, 3000);
+        return (
+            <div className="alerts notification is-danger">
+                {app.messages}
+            </div>
+        );
+    }
+
     render() {
         const {app, calendar} = this.props;
         const {selectedDate} = calendar;
         const {days, monthName} = calendar.selectedMonthData;
         return (
             <div className="app">
+                {this.renderAlerts()}
                 <h2 className="appTitle">{monthName}</h2>
                 <Calendar DayCell={Cell} data={days} calendar={calendar} onDateClick={this.handleDateClick} onEventClick={this.handleEventClick} />
                 <Event event={this.state.selectedEvent} 
-                       messages={app.messages}
                        open={app.eventModalIsOpen} 
                        selectedDate={selectedDate} 
                        onEventSubmit={this.handleEventSubmit} 

@@ -1,6 +1,6 @@
 import uuid from 'uuid/v4'
 import { checkForConflict } from '../util/event';
-import { conflictMessage } from './app';
+import { conflictMessage, clearMessage } from './app';
 
 //Actions
 const GET_EVENTS = 'event/GET_EVENTS';
@@ -17,12 +17,24 @@ export function getEvents() {
 export function createEvent(event, dayEvents) {
     console.log('INSIDE CREATE EVENT')
     return dispatch => {
+        dispatch(clearMessage())
         if(checkForConflict(event, dayEvents)) {
-            //TODO: dispatch conflicts
             dispatch(conflictMessage())
         }
         else {
             dispatch(newEvent(event))
+        }
+    }
+}
+
+export function updateEvent(event, dayEvents) {
+    return dispatch => {
+        dispatch(clearMessage())
+        if(checkForConflict(event, dayEvents)) {
+            dispatch(conflictMessage())
+        }
+        else {
+            dispatch(editEvent(event))
         }
     }
 }
@@ -45,7 +57,7 @@ export function deleteEvent(eventId) {
     }
 }
 
-export function updateEvent(event) {
+export function editEvent(event) {
     return {
         type: UPDATE_EVENT,
         event

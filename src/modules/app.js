@@ -31,9 +31,9 @@ function appReducer(state = initialState, action) {
         case CLOSE_EVENT_MODAL:
             return {...state, eventModalIsOpen: false};
         case CONFLICT_MESSAGE:
-            return {...state, message: action.message};
+            return {...state, messages: action.message};
         case CLEAR_MESSAGE:
-            return {...state, message: ''};
+            return {...state, messages: ''};
         default:
             return state;
     }

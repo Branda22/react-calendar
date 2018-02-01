@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 const Event = ({event, onClick}) => {
     const handleClick = (e) => onClick(e, event);
-    return <div id={event.id} className="event-item" onClick={handleClick} >{event.notes}</div>;
+    return <div id={event.id} className="event-item" onClick={handleClick} >{`${event.notes} - ${event.startTime}...${event.endTime}`}</div>;
 }
 
 const Day = ({date, events, onClick, onEventClick}) => {    

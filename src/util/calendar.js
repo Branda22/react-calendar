@@ -12,14 +12,14 @@ export function prepareDataForMonth() {
             month: -1,
             year: -1
         }
-    } )
+    });
     const daysInMonth = _.range(1,moment().daysInMonth()+1).map(day => {
         return {
             day: day.toString(), 
             month: currentMonth,
             year: currentYear
         }
-    })
+    });
 
     const days = [
         ...offsetDays,
@@ -37,7 +37,7 @@ export function prepareDataForMonth() {
 }
 
 function getFirstDayOfMonth(){
-    return moment().startOf('month').day()
+    return moment().startOf('month').day();
 }
 
 function calculateOffSet(firstDayOfMonth){
