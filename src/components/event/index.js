@@ -16,11 +16,11 @@ class Event extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     const { event } = newProps;
-    console.log('event inside receiveProps', event)
     if(event) {
       this.setState({
         edit: true,
@@ -59,16 +59,23 @@ class Event extends Component {
     this.props.onClose()
   }
 
+  handleDelete() {
+    this.resetState()
+    this.props.onEventDelete(this.state.id)
+    this.props.onClose()
+  }
+
   handleSubmit() {
     this.resetState()
     this.props.onEventSubmit({...this.state, ...this.props.selectedDate})
+    this.props.onClose()
   }
 
   renderHeader() {
     const {selectedDate: {day, month, year}} = this.props;
     return (
       <div>
-        <h3>{`${month}/${day}/${year}`}</h3>
+        <h3 style={{textAlign: 'right'}}>Event for: {`${month}/${day}/${year}`}</h3>
       </div>
     );
   }
@@ -108,14 +115,21 @@ class Event extends Component {
               <input name="notes" value={notes} className="input" type="text" onChange={this.handleChange} />
             </div>
           </div>
-          <div className="field">
-            <div className="control">
-              <button className="button is-primary is-small" onClick={this.handleSubmit}>{edit ? 'Edit' : 'Submit'}</button>
+          <div className="field is-horizontal">
+            <div className="field">
+              <div className="control">
+                <button className="button is-primary is-small" onClick={this.handleSubmit}>{edit ? 'Edit' : 'Submit'}</button>
+              </div>
             </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <button className="button is-primary is-small" onClick={this.handleCancel}>Cancel</button>
+            <div className="field">
+              <div className="control">
+                <button className="button is-info is-small" onClick={this.handleCancel}>Cancel</button>
+              </div>
+            </div>
+            <div className="field">
+              <div className="control">
+                <button className={"button is-danger is-small"} disabled={!edit} onClick={this.handleDelete}>Delete</button>
+              </div>
             </div>
           </div>
         </div>

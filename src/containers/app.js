@@ -4,7 +4,7 @@ import Calendar from '../components/calendar';
 import Event from '../components/event';
 import Cell from '../components/cell';
 import { openEventModal, closeEventModal } from '../modules/app';
-import { createEvent, updateEvent, mapEventsToDays } from '../modules/events';
+import { createEvent, updateEvent, mapEventsToDays, deleteEvent } from '../modules/events';
 import { selectDate } from '../modules/calendar';
 
 import {daysOfTheWeek} from '../constants';
@@ -19,6 +19,11 @@ class App extends Component {
         this.handleEventSubmit = this.handleEventSubmit.bind(this);
         this.handleModalClose = this.handleModalClose.bind(this);
         this.handleEventClick = this.handleEventClick.bind(this);
+        this.handleEventDelete = this.handleEventDelete.bind(this);
+    }
+
+    resetState() {
+        this.setState({selectedState: null})
     }
 
     handleEventClick(e, date, event) {
@@ -38,17 +43,22 @@ class App extends Component {
     }
 
     handleEventSubmit(event) {
+        this.resetState();
         if(event.id) {
-            console.log('update')
-            this.props.updateEvent(event)
+            this.props.updateEvent(event);
         } else {
-            console.log('create')
-            this.props.createEvent(event)
+            this.props.createEvent(event);
         }
     }
 
+    handleEventDelete(eventId) {
+        this.resetState();
+        this.props.deleteEvent(eventId)
+    }
+
     handleModalClose() {
-        this.props.closeEventModal()
+        this.resetState();
+        this.props.closeEventModal();
     }
 
     render() {
@@ -59,7 +69,7 @@ class App extends Component {
             <div className="app">
                 <h2 className="appTitle">{monthName}</h2>
                 <Calendar DayCell={Cell} data={days} calendar={calendar} onDateClick={this.handleDateClick} onEventClick={this.handleEventClick} />
-                <Event event={this.state.selectedEvent} open={app.eventModalIsOpen} selectedDate={selectedDate} onEventSubmit={this.handleEventSubmit} onClose={this.handleModalClose} />
+                <Event event={this.state.selectedEvent} open={app.eventModalIsOpen} selectedDate={selectedDate} onEventSubmit={this.handleEventSubmit} onEventDelete={this.handleEventDelete} onClose={this.handleModalClose} />
             </div>
         )
     }
@@ -92,6 +102,9 @@ function mapDispatchToProps(dispatch) {
         },
         updateEvent(event) {
             dispatch(updateEvent(event))
+        },
+        deleteEvent(eventId) {
+            dispatch(deleteEvent(eventId))
         },
         setCurrentDate(date) {
             dispatch(selectDate(date))
