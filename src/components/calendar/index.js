@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import uuid from 'uuid/v4';
 class Calendar extends Component {
     constructor(props) {
         super(props)
@@ -7,7 +8,7 @@ class Calendar extends Component {
     renderHeader() {
         const {daysOfTheWeek} = this.props.calendar;
         if(!daysOfTheWeek) return null;
-        const headerDays = daysOfTheWeek.map(day => <div className="headerCell">{day}</div>)
+        const headerDays = daysOfTheWeek.map(day => <div key={uuid()} className="headerCell">{day}</div>)
         return (
             <div className="header">
                 {headerDays}
@@ -20,7 +21,7 @@ class Calendar extends Component {
         if(!DayCell || !data) {
             return null;
         }
-        const dayCells = data.map(d => <DayCell date={d} onClick={onDateClick} onEventClick={onEventClick}/>)
+        const dayCells = data.map(d => <DayCell key={uuid()} date={d} onClick={onDateClick} onEventClick={onEventClick}/>)
 
         return (
             <div className="body">

@@ -37,12 +37,12 @@ class TimePicker extends Component {
       <div className="time-picker field is-horizontal">
         <div className="select is-small">
           <select name="hour" value={hour} onChange={this.handleChange}>
-            {_.range(0, 12).map(n => <option value={n}>{n}</option>)}
+            {_.range(0, 13).map(n => <option key={n} value={n}>{n}</option>)}
           </select>
         </div>
         <div className="select is-small">
           <select name="minute" value={minute} onChange={this.handleChange}>
-            {_.range(0, 60).map(n => <option value={n}>{formatMinute(n)}</option>)}
+            {_.range(0, 60).map(n => <option key={n} value={n}>{formatMinute(n)}</option>)}
           </select>
         </div>
         <div className="select is-small">

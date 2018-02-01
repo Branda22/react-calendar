@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 export default class Challenge2 extends Component {
     handleClick(e) {
-        alert(e.target.id)
+        alert(e.target.id || e.target.parentNode.id)
     }
 
     renderName = (name) => <p className="challenge-label">{name}</p>;

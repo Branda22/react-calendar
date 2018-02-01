@@ -20,7 +20,7 @@ const Day = ({date, events, onClick, onEventClick}) => {
             return null;
         }
 
-        return events.map(event => <Event event={event} onClick={handleEventClick} />);
+        return events.map(event => <Event key={event.id} event={event} onClick={date.day > 0 ? handleEventClick : null} />);
     }
 
     return (
