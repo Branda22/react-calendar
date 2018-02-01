@@ -15,8 +15,8 @@ export function createEvent(event) {
     return {
         type: CREATE_EVENT,
         newEvent: {
-            id: uuid(),
-            ...event
+            ...event,
+            id: uuid()
         }
     }
 }
@@ -64,7 +64,7 @@ export default function eventsReducer(state = [], action) {
             return state;
         case UPDATE_EVENT:
             const restOfEvents = _.filter(state, event => event.id !== action.event.id)
-            return [...state, action.event]
+            return [...restOfEvents, action.event]
         default:
             return state;
     }

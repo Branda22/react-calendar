@@ -23,7 +23,6 @@ class App extends Component {
 
     handleEventClick(e, date, event) {
         const {setCurrentDate, openEventModal} = this.props;
-        console.log(e.target, date, event)
         this.setState({
             selectedEvent: event
         }, () => {
@@ -33,14 +32,12 @@ class App extends Component {
     }
 
     handleDateClick(e, date) {
-        console.log(e.target, date)
         const {setCurrentDate, openEventModal} = this.props;
         setCurrentDate(date);
         openEventModal(date);
     }
 
     handleEventSubmit(event) {
-        console.log(event)
         if(event.id) {
             console.log('update')
             this.props.updateEvent(event)

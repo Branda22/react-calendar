@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 
 const Event = ({event, onClick}) => {
-    console.log('EVENT.PROP', event)
     const handleClick = (e) => onClick(e, event);
     return <a id={event.id} className="event-item" onClick={handleClick} >{event.notes}</a>;
 }
